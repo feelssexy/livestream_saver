@@ -1023,12 +1023,12 @@ def main():
     loaded_ytdlp_conf = load_commented_json(ytdlp_conf_file)
 
     # Try to load PO token if needed
-    po_token = load_po_token(config_dir)
-    try:
-        interpolate_ytdlp_config(loaded_ytdlp_conf, po_token=po_token)
-    except ValueError as exc:
-        log.critical("Error interpolating ytdlp config: %s", exc)
-        return
+    #po_token = load_po_token(config_dir)
+    #try:
+    #    interpolate_ytdlp_config(loaded_ytdlp_conf, po_token=po_token)
+    #except ValueError as exc:
+    #    log.critical("Error interpolating ytdlp config: %s", exc)
+    #    return
 
     args["ytdlp_config"] = loaded_ytdlp_conf
 
@@ -1098,7 +1098,7 @@ def main():
             output_path = create_output_dir(
                 output_dir=output_path, video_id=None)
 
-        logfile_path = output_dir / f"download_{video_id}.log"
+        logfile_path = Path(output_dir) / f"download_{video_id}.log"
         setup_logger(
             output_filepath=logfile_path,
             loglevel=config.get(sub_cmd, "log_level", vars=args)
